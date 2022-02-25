@@ -1,4 +1,4 @@
-from teqniqly_networks.directed_network import Node, DirectedNetwork
+from teqniqly_networks.networks import DirectedNetwork
 
 network = DirectedNetwork()
 
