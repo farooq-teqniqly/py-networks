@@ -4,6 +4,9 @@ from typing import Any, Dict, List, Generator
 
 class Node:
     def __init__(self, key: str, data: Any):
+        if not key or len(key.strip()) == 0:
+            raise ValueError("The node's key must be specified.")
+
         self.key = key
         self.data = data
 
