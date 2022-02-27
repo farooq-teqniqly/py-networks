@@ -1,5 +1,5 @@
 import os
-from teqniqly_networks.graph import Edge, Graph
+from teqniqly_networks.graph import Edge, Graph, tsp_nna
 
 graph = Graph()
 
@@ -27,3 +27,17 @@ def test_graph_creation():
 
     for key in graph.nodes.keys():
         assert len(graph.nodes[key]) == 41
+
+
+def test_tsp_nna():
+    tour = tsp_nna(graph, "c0")
+    total_distance = 0
+
+    while len(tour) > 0:
+        stop = tour.popleft()
+        print(f"{stop} --> ", end=" ")
+
+        if stop.__getitem__(1):
+            total_distance += int(stop[1])
+
+    print(f"Total distance: {total_distance}")

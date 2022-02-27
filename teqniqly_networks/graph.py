@@ -1,4 +1,5 @@
 from typing import List, Any, Dict, Tuple
+from collections import deque
 
 
 class Edge:
@@ -23,3 +24,37 @@ class Graph:
 
         # uncomment for undirected graph
         # self.nodes[edge.node2].append((edge.node1, edge.weight))
+
+
+def tsp_nna(graph: Graph, start_node) -> deque:
+    unvisited_nodes = [key for key in graph.nodes.keys() if key != start_node]
+    tour = deque()
+    current_node = start_node
+    tour.append(current_node)
+
+    while len(unvisited_nodes) > 0:
+        next_node = _find_nn(graph.nodes[current_node], unvisited_nodes, start_node)
+        tour.append(next_node)
+        unvisited_nodes.remove(next_node[0])
+        current_node = next_node[0]
+        pass
+
+    tour.append((start_node, [tup for tup in graph.nodes[current_node] if tup[0] == start_node][0][1]))
+
+    return tour
+
+
+def _find_nn(node: List[Tuple[Any, int]], unvisited_nodes: list, start_node) -> Tuple[Any, int]:
+    nn = (None, 1000000)
+
+    for neighbor in node:
+        if neighbor[0] == start_node:
+            continue
+
+        if neighbor[0] not in unvisited_nodes:
+            continue
+
+        if neighbor[1] < nn[1]:
+            nn = neighbor
+
+    return nn
