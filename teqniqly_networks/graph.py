@@ -9,9 +9,17 @@ class Edge:
         self.weight = weight
 
 
+class MovieEdge(Edge):
+    pass
+
+
+class ActorEdge(Edge):
+    pass
+
+
 class Graph:
     def __init__(self):
-        self.nodes: Dict[Any, List[Tuple[Any, int]]] = {}
+        self.nodes: Dict[Any, List[Tuple[Any, int, Any]]] = {}
 
     def add_edge(self, edge):
         if edge.node1 not in self.nodes:
@@ -20,7 +28,8 @@ class Graph:
         if edge.node2 not in self.nodes:
             self.nodes[edge.node2] = []
 
-        self.nodes[edge.node1].append((edge.node2, edge.weight))
+        self.nodes[edge.node1].append((edge.node2, edge.weight, "a" if isinstance(edge, MovieEdge) else "m"))
+        pass
 
         # uncomment for undirected graph
         # self.nodes[edge.node2].append((edge.node1, edge.weight))
@@ -44,7 +53,7 @@ def tsp_nna(graph: Graph, start_node) -> deque:
     return tour
 
 
-def _find_nn(node: List[Tuple[Any, int]], unvisited_nodes: list, start_node) -> Tuple[Any, int]:
+def _find_nn(node: List[Tuple[Any, int, Any]], unvisited_nodes: list, start_node) -> Tuple[Any, int]:
     nn = (None, 1000000)
 
     for neighbor in node:

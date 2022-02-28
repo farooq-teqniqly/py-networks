@@ -1,4 +1,4 @@
-from teqniqly_networks.graph import Graph, Edge
+from teqniqly_networks.graph import Graph, MovieEdge, ActorEdge
 from collections import deque
 
 
@@ -6,30 +6,34 @@ def test_movie_graph():
     graph = Graph()
 
     edges = [
-        Edge("Fargo", "William Macy", 0),
-        Edge("Fargo", "Frances McDormand", 0),
-        Edge("Fargo", "Steve Buscemi", 0),
-        Edge("The Big Lebowski", "Steve Buscemi", 0),
-        Edge("The Big Lebowski", "John Goodman", 0),
-        Edge("The Big Lebowski", "Jeff Bridges", 0),
-        Edge("True Grit", "Jeff Bridges", 0),
-        Edge("True Grit", "Matt Damon", 0),
-        Edge("True Grit", "Josh Brolin", 0),
-        Edge("The Bourne Identity", "Matt Damon", 0),
-        Edge("The Bourne Identity", "Franka Potente", 0),
-        Edge("The Bourne Identity", "Julia Stiles", 0),
-        Edge("William Macy", "Fargo", 0),
-        Edge("Frances McDormand", "Fargo", 0),
-        Edge("Steve Buscemi", "Fargo", 0),
-        Edge("Steve Buscemi", "The Big Lebowski", 0),
-        Edge("John Goodman", "The Big Lebowski", 0),
-        Edge("Jeff Bridges", "The Big Lebowski", 0),
-        Edge("Jeff Bridges", "True Grit", 0),
-        Edge("Matt Damon", "True Grit", 0),
-        Edge("Josh Brolin", "True Grit", 0),
-        Edge("Matt Damon", "The Bourne Identity", 0),
-        Edge("Franka Potente", "The Bourne Identity", 0),
-        Edge("Julia Stiles", "The Bourne Identity", 0)
+        MovieEdge("Jackie Brown", "Samuel L. Jackson", 0),
+        MovieEdge("Jackie Brown", "Robert DeNiro", 0),
+        MovieEdge("Fargo", "William Macy", 0),
+        MovieEdge("Fargo", "Frances McDormand", 0),
+        MovieEdge("Fargo", "Steve Buscemi", 0),
+        MovieEdge("The Big Lebowski", "Steve Buscemi", 0),
+        MovieEdge("The Big Lebowski", "John Goodman", 0),
+        MovieEdge("The Big Lebowski", "Jeff Bridges", 0),
+        MovieEdge("True Grit", "Jeff Bridges", 0),
+        MovieEdge("True Grit", "Matt Damon", 0),
+        MovieEdge("True Grit", "Josh Brolin", 0),
+        MovieEdge("The Bourne Identity", "Matt Damon", 0),
+        MovieEdge("The Bourne Identity", "Franka Potente", 0),
+        MovieEdge("The Bourne Identity", "Julia Stiles", 0),
+        ActorEdge("William Macy", "Fargo", 0),
+        ActorEdge("Frances McDormand", "Fargo", 0),
+        ActorEdge("Steve Buscemi", "Fargo", 0),
+        ActorEdge("Steve Buscemi", "The Big Lebowski", 0),
+        ActorEdge("John Goodman", "The Big Lebowski", 0),
+        ActorEdge("Jeff Bridges", "The Big Lebowski", 0),
+        ActorEdge("Jeff Bridges", "True Grit", 0),
+        ActorEdge("Matt Damon", "True Grit", 0),
+        ActorEdge("Josh Brolin", "True Grit", 0),
+        ActorEdge("Matt Damon", "The Bourne Identity", 0),
+        ActorEdge("Franka Potente", "The Bourne Identity", 0),
+        ActorEdge("Julia Stiles", "The Bourne Identity", 0),
+        ActorEdge("Samuel L. Jackson", "Jackie Brown", 0),
+        ActorEdge("Robert DeNiro", "Jackie Brown", 0)
     ]
 
     for edge in edges:
@@ -37,6 +41,7 @@ def test_movie_graph():
 
     search_queue = deque()
     visited_nodes = []
+    movie_path = []
 
     start_actor = "William Macy"
     end_actor = "Julia Stiles"
@@ -55,4 +60,7 @@ def test_movie_graph():
 
         visited_nodes.append(key)
 
-    pass
+        if node[2] == "m":
+            movie_path.append(key)
+
+    assert movie_path == ["Fargo", "The Big Lebowski", "True Grit", "The Bourne Identity"]
