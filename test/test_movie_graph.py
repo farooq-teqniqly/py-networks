@@ -6,6 +6,9 @@ graph = Graph()
 
 def setup_module(module):
     edges = [
+        MovieEdge("The Departed", "Matt Damon", 0),
+        MovieEdge("The Departed", "Jack Nicholson", 0),
+        MovieEdge("The Departed", "Leonardo DiCaprio", 0),
         MovieEdge("Jackie Brown", "Samuel L. Jackson", 0),
         MovieEdge("Jackie Brown", "Robert DeNiro", 0),
         MovieEdge("The Godfather Part II", "Robert DeNiro", 0),
@@ -35,7 +38,10 @@ def setup_module(module):
         ActorEdge("Julia Stiles", "The Bourne Identity", 0),
         ActorEdge("Samuel L. Jackson", "Jackie Brown", 0),
         ActorEdge("Robert DeNiro", "Jackie Brown", 0),
-        ActorEdge("Robert DeNiro", "The Godfather Part II", 0)
+        ActorEdge("Robert DeNiro", "The Godfather Part II", 0),
+        ActorEdge("Matt Damon", "The Departed", 0),
+        ActorEdge("Jack Nicholson", "The Departed", 0),
+        ActorEdge("Leonardo DiCaprio", "The Departed", 0)
     ]
 
     for edge in edges:
