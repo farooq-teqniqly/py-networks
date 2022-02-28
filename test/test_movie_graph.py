@@ -1,13 +1,14 @@
 from teqniqly_networks.graph import Graph, MovieEdge, ActorEdge
 from collections import deque
 
+graph = Graph()
 
-def test_movie_graph():
-    graph = Graph()
 
+def setup_module(module):
     edges = [
         MovieEdge("Jackie Brown", "Samuel L. Jackson", 0),
         MovieEdge("Jackie Brown", "Robert DeNiro", 0),
+        MovieEdge("The Godfather Part II", "Robert DeNiro", 0),
         MovieEdge("Fargo", "William Macy", 0),
         MovieEdge("Fargo", "Frances McDormand", 0),
         MovieEdge("Fargo", "Steve Buscemi", 0),
@@ -33,18 +34,21 @@ def test_movie_graph():
         ActorEdge("Franka Potente", "The Bourne Identity", 0),
         ActorEdge("Julia Stiles", "The Bourne Identity", 0),
         ActorEdge("Samuel L. Jackson", "Jackie Brown", 0),
-        ActorEdge("Robert DeNiro", "Jackie Brown", 0)
+        ActorEdge("Robert DeNiro", "Jackie Brown", 0),
+        ActorEdge("Robert DeNiro", "The Godfather Part II", 0)
     ]
 
     for edge in edges:
         graph.add_edge(edge)
 
+
+def test_movie_graph():
     search_queue = deque()
     visited_nodes = []
     movie_path = []
 
-    start_actor = "William Macy"
-    end_actor = "Julia Stiles"
+    start_actor = "Frances McDormand"
+    end_actor = "Franka Potente"
 
     search_queue += graph.nodes[start_actor]
 
